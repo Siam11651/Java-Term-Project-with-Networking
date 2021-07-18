@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<VBox spacing="10.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="termproject.PlayerSearchController">
+   <children>
+      <Label text="Search Players">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <HBox spacing="10.0">
+         <children>
+            <VBox fillWidth="false" spacing="10.0">
+               <children>
+                  <HBox fillHeight="false" spacing="10.0">
+                     <children>
+                        <Label minWidth="62.0" text="Name:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="FX_TEXT_FIELD_NAME" text="Any" />
+                     </children>
+                  </HBox>
+                  <HBox fillHeight="false" spacing="10.0">
+                     <children>
+                        <Label minWidth="62.0" text="Country:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="FX_TEXT_FIELD_COUNTRY" text="Any" />
+                     </children>
+                  </HBox>
+                  <HBox fillHeight="false" spacing="10.0">
+                     <children>
+                        <Label minWidth="62.0" text="Age:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="FX_TEXT_FIELD_AGE" text="Any" />
+                     </children>
+                  </HBox>
+                  <HBox fillHeight="false" spacing="10.0">
+                     <children>
+                        <Label minWidth="62.0" text="Height:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="FX_TEXT_FIELD_HEIGHT" text="Any" />
+                     </children>
+                  </HBox>
+                  <HBox fillHeight="false" spacing="10.0">
+                     <children>
+                        <Label minWidth="62.0" text="Position:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="FX_TEXT_FIELD_POSITION" text="Any" />
+                     </children>
+                  </HBox>
+                  <HBox fillHeight="false" spacing="10.0">
+                     <children>
+                        <Label minWidth="62.0" text="Number:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="FX_TEXT_FIELD_NUMBER" text="Any" />
+                     </children>
+                  </HBox>
+                  <HBox fillHeight="false" spacing="10.0">
+                     <children>
+                        <Label minWidth="62.0" text="Salary:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="FX_TEXT_FIELD_SALARY" text="Any" />
+                     </children>
+                  </HBox>
+                  <Button mnemonicParsing="false" onAction="#Action_search" text="Search" />
+               </children>
+            </VBox>
+            <Separator orientation="VERTICAL" />
+            <VBox fillWidth="false" spacing="10.0">
+               <children>
+                  <Button minWidth="169.0" mnemonicParsing="false" text="Player with Maximum Salary" />
+                  <Button minWidth="169.0" mnemonicParsing="false" text="Player with Maximum Height" />
+                  <Button minWidth="169.0" mnemonicParsing="false" text="Player with Maximum Age" />
+                  <Button minWidth="169.0" mnemonicParsing="false" text="Total Weekly Salary" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>

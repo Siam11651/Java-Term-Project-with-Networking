@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" fillWidth="false" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="termproject.LoginController">
+   <children>
+      <HBox spacing="10.0">
+         <children>
+            <Label text="Club Name:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="FX_TEXT_FIELD_CLUB_NAME" promptText="Juventus FC" />
+            <Button mnemonicParsing="false" onAction="#Action_login" text="Login" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

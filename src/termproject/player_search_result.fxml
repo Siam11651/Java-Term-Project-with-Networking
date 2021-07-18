@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="termproject.PlayerSearchResultController">
+   <children>
+      <Button mnemonicParsing="false" onAction="#Action_back" text="Back" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+      <ListView fx:id="FX_LIST_VIEW_PLAYER_DETAILS" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0" />
+      <Button mnemonicParsing="false" onAction="#Action_refresh" text="Refresh" AnchorPane.leftAnchor="61.0" AnchorPane.topAnchor="10.0" />
+      <Label fx:id="FX_LABEL_PLAYER_SEARCH_UPDATE_NOTIFICATION" text="Refresh to Update" visible="false" AnchorPane.leftAnchor="127.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
