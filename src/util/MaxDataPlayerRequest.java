@@ -1,6 +1,8 @@
 package util;
 
-public class MaxDataPlayerRequest
+import java.io.Serializable;
+
+public class MaxDataPlayerRequest implements Serializable
 {
     private String from;
     private MaxDataType maxDataType;

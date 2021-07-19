@@ -147,6 +147,16 @@ public class ReadThreadClient implements Runnable
                         }
                     });
                 }
+                else if(o instanceof TotalSalaryResult)
+                {
+                    TotalSalaryResult totalSalaryResult = (TotalSalaryResult)o;
+                    int totalSalary = totalSalaryResult.GetTotalSalary();
+
+                    Platform.runLater(()->
+                    {
+                        //show total salary
+                    });
+                }
             }
         }
         catch (Exception e)

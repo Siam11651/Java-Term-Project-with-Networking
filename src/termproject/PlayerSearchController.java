@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import util.MaxDataPlayerRequest;
 import util.MaxDataType;
 import util.PlayerSearchRequest;
+import util.TotalSalaryRequest;
 
 import java.io.IOException;
 import java.net.URL;
@@ -77,5 +78,13 @@ public class PlayerSearchController implements Initializable
 
         Main.ShowLoadingClubOptions(getClass());
         Main.client.GetNetworkUtil().write(Main.lastMaxDataRequest);
+    }
+
+    public void Action_total_salary(ActionEvent actionEvent) throws IOException
+    {
+        TotalSalaryRequest totalSalaryRequest = new TotalSalaryRequest(Main.clubName);
+
+        Main.ShowLoadingClubOptions(getClass());
+        Main.client.GetNetworkUtil().write(totalSalaryRequest);
     }
 }

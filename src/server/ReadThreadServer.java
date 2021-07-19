@@ -156,6 +156,18 @@ public class ReadThreadServer implements Runnable
                             networkUtil.write(maxDataPlayerResult);
                         }
                     }
+                    else if(o instanceof TotalSalaryRequest)
+                    {
+                        TotalSalaryRequest totalSalaryRequest = (TotalSalaryRequest)o;
+                        String from = totalSalaryRequest.GetFrom();
+                        TotalSalaryResult totalSalaryResult = TotalSalaryResult.GetResult(totalSalaryRequest, players);
+                        NetworkUtil networkUtil = clientMap.get(from);
+
+                        if(networkUtil != null)
+                        {
+                            networkUtil.write(totalSalaryResult);
+                        }
+                    }
                 }
             }
         }

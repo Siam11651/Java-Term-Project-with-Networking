@@ -2,9 +2,10 @@ package util;
 
 import termproject.Main;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MaxDataPlayerResult
+public class MaxDataPlayerResult implements Serializable
 {
     private ArrayList<Player> players;
 
@@ -33,7 +34,7 @@ public class MaxDataPlayerResult
 
             for(Player player : all)
             {
-                if(maxDataPlayerRequest.GetFrom().equalsIgnoreCase("any") || maxDataPlayerRequest.GetFrom().equalsIgnoreCase(player.GetClub()))
+                if(maxDataPlayerRequest.GetFrom().equalsIgnoreCase(player.GetClub()))
                 {
                     maxVal = Math.max(maxVal, player.GetAge());
                 }
@@ -43,7 +44,7 @@ public class MaxDataPlayerResult
             {
                 for(Player player : all)
                 {
-                    if(maxVal == player.GetAge())
+                    if(maxDataPlayerRequest.GetFrom().equalsIgnoreCase(player.GetClub()) && maxVal == player.GetAge())
                     {
                         result.add(player);
                     }
@@ -56,7 +57,7 @@ public class MaxDataPlayerResult
 
             for(Player player : all)
             {
-                if(maxDataPlayerRequest.GetFrom().equalsIgnoreCase("any") || maxDataPlayerRequest.GetFrom().equalsIgnoreCase(player.GetClub()))
+                if(maxDataPlayerRequest.GetFrom().equalsIgnoreCase(player.GetClub()))
                 {
                     maxVal = Math.max(maxVal, player.GetWeeklySalary());
                 }
@@ -66,7 +67,7 @@ public class MaxDataPlayerResult
             {
                 for(Player player : all)
                 {
-                    if(maxVal == player.GetWeeklySalary())
+                    if(maxDataPlayerRequest.GetFrom().equalsIgnoreCase(player.GetClub()) && maxVal == player.GetWeeklySalary())
                     {
                         result.add(player);
                     }
@@ -79,7 +80,7 @@ public class MaxDataPlayerResult
 
             for(Player player : all)
             {
-                if(maxDataPlayerRequest.GetFrom().equalsIgnoreCase("any") || maxDataPlayerRequest.GetFrom().equalsIgnoreCase(player.GetClub()))
+                if(maxDataPlayerRequest.GetFrom().equalsIgnoreCase(player.GetClub()))
                 {
                     maxVal = Math.max(maxVal, player.GetHeight());
                 }
@@ -89,7 +90,7 @@ public class MaxDataPlayerResult
             {
                 for(Player player : all)
                 {
-                    if(maxVal == player.GetHeight())
+                    if(maxDataPlayerRequest.GetFrom().equalsIgnoreCase(player.GetClub()) && maxVal == player.GetHeight())
                     {
                         result.add(player);
                     }

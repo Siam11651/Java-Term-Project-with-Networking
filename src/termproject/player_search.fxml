@@ -95,7 +95,7 @@
                   <Button minWidth="169.0" mnemonicParsing="false" onAction="#Action_max_salary" text="Player with Maximum Salary" />
                   <Button minWidth="169.0" mnemonicParsing="false" onAction="#Action_max_height" text="Player with Maximum Height" />
                   <Button minWidth="169.0" mnemonicParsing="false" onAction="#Action_max_age" text="Player with Maximum Age" />
-                  <Button minWidth="169.0" mnemonicParsing="false" text="Total Weekly Salary" />
+                  <Button minWidth="169.0" mnemonicParsing="false" onAction="#Action_total_salary" text="Total Weekly Salary" />
                </children>
             </VBox>
          </children>
