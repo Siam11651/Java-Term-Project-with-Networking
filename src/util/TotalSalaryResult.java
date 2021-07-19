@@ -9,7 +9,7 @@ public class TotalSalaryResult implements Serializable
 
     public TotalSalaryResult(int totalSalary)
     {
-
+        SetTotalSalary(totalSalary);
     }
 
     public void SetTotalSalary(int totalSalary)
