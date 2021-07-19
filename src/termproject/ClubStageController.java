@@ -54,7 +54,8 @@ public class ClubStageController implements Initializable
     public void MouseClicked_option_list(MouseEvent mouseEvent) throws IOException
     {
         int index = FX_LIST_VIEW_CLUB_OPTIONS.getSelectionModel().getSelectedIndex();
-        Main.lastPlayerSearchRequest = null;
+
+        Main.NullifyAllLastSearches();
 
         if(index == 0)
         {

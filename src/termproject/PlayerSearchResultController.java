@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -36,6 +35,14 @@ public class PlayerSearchResultController implements Initializable
     public void Action_refresh(ActionEvent actionEvent) throws IOException
     {
         Main.ShowLoadingClubOptions(getClass());
-        Main.client.GetNetworkUtil().write(Main.lastPlayerSearchRequest);
+
+        if(Main.lastPlayerSearchRequest != null)
+        {
+            Main.client.GetNetworkUtil().write(Main.lastPlayerSearchRequest);
+        }
+        else if(Main.lastMaxDataRequest != null)
+        {
+            Main.client.GetNetworkUtil().write(Main.lastMaxDataRequest);
+        }
     }
 }

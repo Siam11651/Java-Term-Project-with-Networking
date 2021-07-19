@@ -115,20 +115,35 @@ public class ReadThreadClient implements Runnable
 
                     Platform.runLater(()->
                     {
+                        String to = transferUpdate.GetTo();
+                        String from = transferUpdate.GetFrom();
                         Label transferUpdateNotification = (Label)Main.mainStage.getScene().lookup("#FX_LABEL_TRANFER_UPDATE_NOTIFICATION");
                         Label playerSoldNotification = (Label)Main.mainStage.getScene().lookup("#FX_LABEL_PLAYER_SEARCH_UPDATE_NOTIFICATION");
 
-                        if(transferUpdateNotification != null)
+                        if(transferUpdateNotification != null && !to.equalsIgnoreCase(Main.clubName))
                         {
                             transferUpdateNotification.setVisible(true);
                         }
 
-                        String to = transferUpdate.GetTo();
-                        String from = transferUpdate.GetFrom();
-
                         if(playerSoldNotification != null && !to.isEmpty() && from.equalsIgnoreCase(Main.clubName))
                         {
                             playerSoldNotification.setVisible(true);
+                        }
+                    });
+                }
+                else if(o instanceof MaxDataPlayerResult)
+                {
+                    MaxDataPlayerResult maxDataPlayerResult = (MaxDataPlayerResult)o;
+
+                    Platform.runLater(()->
+                    {
+                        try
+                        {
+                            Main.ShowPlayerSearchedDetails(getClass(), maxDataPlayerResult.GetPlayers());
+                        }
+                        catch(IOException ioException)
+                        {
+                            ioException.printStackTrace();
                         }
                     });
                 }

@@ -144,6 +144,18 @@ public class ReadThreadServer implements Runnable
                             }
                         }
                     }
+                    else if(o instanceof MaxDataPlayerRequest)
+                    {
+                        MaxDataPlayerRequest maxDataPlayerRequest = (MaxDataPlayerRequest)o;
+                        String from = maxDataPlayerRequest.GetFrom();
+                        MaxDataPlayerResult maxDataPlayerResult = MaxDataPlayerResult.GetResult(maxDataPlayerRequest, players);
+                        NetworkUtil networkUtil = clientMap.get(from);
+
+                        if(networkUtil != null)
+                        {
+                            networkUtil.write(maxDataPlayerResult);
+                        }
+                    }
                 }
             }
         }

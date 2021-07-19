@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import util.MaxDataPlayerRequest;
+import util.MaxDataType;
 import util.PlayerSearchRequest;
 
 import java.io.IOException;
@@ -29,6 +31,8 @@ public class PlayerSearchController implements Initializable
 
     public void Action_search(ActionEvent actionEvent) throws IOException
     {
+        Main.NullifyAllLastSearches();
+
         Main.lastPlayerSearchRequest = new PlayerSearchRequest
                 (
                         Main.clubName,
@@ -43,5 +47,35 @@ public class PlayerSearchController implements Initializable
 
         Main.ShowLoadingClubOptions(getClass());
         Main.client.GetNetworkUtil().write(Main.lastPlayerSearchRequest);
+    }
+
+    public void Action_max_salary(ActionEvent actionEvent) throws IOException
+    {
+        Main.NullifyAllLastSearches();
+
+        Main.lastMaxDataRequest = new MaxDataPlayerRequest(Main.clubName, MaxDataType.SALARY);
+
+        Main.ShowLoadingClubOptions(getClass());
+        Main.client.GetNetworkUtil().write(Main.lastMaxDataRequest);
+    }
+
+    public void Action_max_height(ActionEvent actionEvent) throws IOException
+    {
+        Main.NullifyAllLastSearches();
+
+        Main.lastMaxDataRequest = new MaxDataPlayerRequest(Main.clubName, MaxDataType.HEIGHT);
+
+        Main.ShowLoadingClubOptions(getClass());
+        Main.client.GetNetworkUtil().write(Main.lastMaxDataRequest);
+    }
+
+    public void Action_max_age(ActionEvent actionEvent) throws IOException
+    {
+        Main.NullifyAllLastSearches();
+
+        Main.lastMaxDataRequest = new MaxDataPlayerRequest(Main.clubName, MaxDataType.AGE);
+
+        Main.ShowLoadingClubOptions(getClass());
+        Main.client.GetNetworkUtil().write(Main.lastMaxDataRequest);
     }
 }

@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import util.CloseRequest;
+import util.MaxDataPlayerRequest;
 import util.Player;
 import util.PlayerSearchRequest;
 
@@ -27,6 +28,13 @@ public class Main extends Application
     public static String clubName;
     public static Stage mainStage;
     public static PlayerSearchRequest lastPlayerSearchRequest;
+    public static MaxDataPlayerRequest lastMaxDataRequest;
+
+    public static void NullifyAllLastSearches()
+    {
+        Main.lastPlayerSearchRequest = null;
+        Main.lastMaxDataRequest = null;
+    }
 
     public static void ShowTransferPlayer(Class<?> thisClass, ArrayList<Player> players) throws IOException
     {
