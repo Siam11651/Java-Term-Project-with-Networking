@@ -1,6 +1,9 @@
 package util;
 
+import javafx.scene.image.Image;
+
 import java.io.Serializable;
+import java.util.Collections;
 
 public class Player implements Serializable
 {
@@ -8,11 +11,13 @@ public class Player implements Serializable
     private int age, number, weeklySalary;
     private double height;
     private boolean transferListed;
+    private byte[] imageByteArr;
 
-    public Player(String name, String country, int age, double height, String club, String position, int number, int weeklySalary, boolean transferListed)
+    public Player(String name, String country, int age, double height, String club, String position, int number, int weeklySalary, byte[] imageByteArr, boolean transferListed)
     {
         SetTransferListed(transferListed);
         SetName(name);
+        SetImageByteArr(imageByteArr);
         SetCountry(country);
         SetAge(age);
         SetHeight(height);
@@ -26,6 +31,7 @@ public class Player implements Serializable
     {
         SetTransferListed(other.transferListed);
         SetName(other.name);
+        SetImageByteArr(other.imageByteArr);
         SetCountry(other.country);
         SetAge(other.age);
         SetHeight(other.height);
@@ -43,6 +49,13 @@ public class Player implements Serializable
     public void SetName(String name)
     {
         this.name = name;
+    }
+
+    public void SetImageByteArr(byte[] imageByteArr)
+    {
+        this.imageByteArr = new byte[imageByteArr.length];
+
+        System.arraycopy(imageByteArr, 0, this.imageByteArr, 0, imageByteArr.length);
     }
 
     public void SetCountry(String country)
@@ -83,6 +96,11 @@ public class Player implements Serializable
     public String GetName()
     {
         return name;
+    }
+
+    public byte[] GetImageByteArr()
+    {
+        return imageByteArr;
     }
 
     public String GetCountry()

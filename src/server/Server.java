@@ -1,15 +1,15 @@
 package server;
 
+import javafx.scene.image.Image;
 import util.Player;
 import util.LoginFail;
 import util.LoginSuccess;
 import util.NetworkUtil;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -88,23 +88,50 @@ public class Server
         }
     }
 
-    public static void main(String args[]) throws FileNotFoundException
+    public static void main(String args[]) throws IOException
     {
         ArrayList<Player> players = new ArrayList<>();
-        File file = new File("data/players.txt");
-        Scanner scanner = new Scanner(file);
+        File file = new File("data/players.dat");
+        FileInputStream fileInputStream = new FileInputStream(file);
 
-        while(scanner.hasNextLine())
+        byte[] playerCountByteArr = new byte[Integer.SIZE / 8];
+
+        fileInputStream.read(playerCountByteArr, 0, Integer.SIZE / 8);
+
+        int playerCount = ByteBuffer.wrap(playerCountByteArr).getInt();
+
+        for(int i = 0; i < playerCount; i++)
         {
-            String[] data = scanner.nextLine().split(",");
+            String[] data = new String[8];
 
-            if(data.length == 8)
+            for(int j = 0; j < 8; j++)
             {
-                players.add(new Player(data[0], data[1], Integer.parseInt(data[2]), Double.parseDouble(data[3]), data[4], data[5], Integer.parseInt(data[6]), (int)Double.parseDouble(data[7]), false));
+                byte[] stringSizeByteArr = new byte[Integer.SIZE / 8];
+
+                fileInputStream.read(stringSizeByteArr, 0, Integer.SIZE / 8);
+
+                int stringSize = ByteBuffer.wrap(stringSizeByteArr).getInt();
+                byte[] stringContentByteArr = new byte[stringSize];
+
+                fileInputStream.read(stringContentByteArr, 0, stringSize);
+
+                data[j] = new String(stringContentByteArr);
             }
+
+            byte[] imageSizeByteArr = new byte[Integer.SIZE / 8];
+
+            fileInputStream.read(imageSizeByteArr, 0, Integer.SIZE / 8);
+
+            int imageSize = ByteBuffer.wrap(imageSizeByteArr).getInt();
+            byte[] imageByteArr = new byte[imageSize];
+
+            fileInputStream.read(imageByteArr, 0, imageSize);
+
+            players.add(new Player(data[0], data[1], Integer.parseInt(data[2]), Double.parseDouble(data[3]), data[4], data[5], Integer.parseInt(data[6]), (int)Double.parseDouble(data[7]), imageByteArr, false));
         }
 
-        scanner.close();
+        fileInputStream.close();
+
         Server server = new Server(players);
     }
 }

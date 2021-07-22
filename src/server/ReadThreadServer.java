@@ -56,6 +56,16 @@ public class ReadThreadServer implements Runnable
                             networkUtil.write(closeRequest);
                         }
 
+                        for(Player player : players)
+                        {
+                            if(player.GetName().equalsIgnoreCase(from))
+                            {
+                                players.remove(player);
+
+                                break;
+                            }
+                        }
+
                         clientMap.remove(from);
                         System.out.println("Client: '" + from + "' disconnecting...");
 

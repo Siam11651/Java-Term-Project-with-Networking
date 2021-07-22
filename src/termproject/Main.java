@@ -8,6 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -18,6 +20,7 @@ import util.MaxDataPlayerRequest;
 import util.Player;
 import util.PlayerSearchRequest;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -53,6 +56,11 @@ public class Main extends Application
                 labels[j] = (Label) ((HBox) ((VBox) playerDetail.getChildren().get(0)).getChildren().get(j)).getChildren().get(1);
             }
 
+            ImageView playerImageView = (ImageView)playerDetail.lookup("#FX_IMAGE_VIEW_TRANSFER_PLAYER_DETAIL");
+            byte[] imageByteArr = player.GetImageByteArr();
+            ByteArrayInputStream imageByteArrayInputStream = new ByteArrayInputStream(imageByteArr);
+
+            playerImageView.setImage(new Image(imageByteArrayInputStream));
             labels[0].setText(player.GetName());
             labels[1].setText(player.GetCountry());
             labels[2].setText(player.GetClub());
@@ -119,6 +127,11 @@ public class Main extends Application
                 labels[j] = (Label) ((HBox) ((VBox) playerDetail.getChildren().get(0)).getChildren().get(j)).getChildren().get(1);
             }
 
+            ImageView playerImageView = (ImageView)playerDetail.lookup("#FX_IMAGE_VIEW_SEARCH_PLAYER_DETAIL");
+            byte[] imageByteArr = player.GetImageByteArr();
+            ByteArrayInputStream imageByteArrayInputStream = new ByteArrayInputStream(imageByteArr);
+
+            playerImageView.setImage(new Image(imageByteArrayInputStream));
             labels[0].setText(player.GetName());
             labels[1].setText(player.GetCountry());
             labels[2].setText(player.GetClub());
