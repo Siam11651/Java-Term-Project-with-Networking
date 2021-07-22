@@ -204,26 +204,28 @@ public class Main extends Application
         }
     }
 
-    public static void ShowClubStage(Class<?> thisClass)
+    public static void ShowClubStage(Class<?> thisClass) throws IOException
     {
-        AnchorPane clubStage = null;
+        AnchorPane clubStage = FXMLLoader.load(Objects.requireNonNull(thisClass.getResource("club_stage.fxml")));
 
-        try
-        {
-            clubStage = FXMLLoader.load(Objects.requireNonNull(thisClass.getResource("club_stage.fxml")));
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
+        ((Label)clubStage.getChildren().get(0)).setText(Main.clubName);
+        ((AnchorPane)Main.mainStage.getScene().getRoot()).getChildren().clear();
+        ((AnchorPane)Main.mainStage.getScene().getRoot()).getChildren().add(clubStage);
+        Main.SetUpRootAnchors(clubStage);
 
-        if(clubStage != null)
-        {
-            ((Label)clubStage.getChildren().get(0)).setText(Main.clubName);
-            ((AnchorPane)Main.mainStage.getScene().getRoot()).getChildren().clear();
-            ((AnchorPane)Main.mainStage.getScene().getRoot()).getChildren().add(clubStage);
-            Main.SetUpRootAnchors(clubStage);
-        }
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), clubStage);
+        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), clubStage);
+
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(1);
+        fadeTransition.setCycleCount(1);
+        fadeTransition.setInterpolator(Interpolator.EASE_OUT);
+        translateTransition.setFromY(10);
+        translateTransition.setToY(0);
+        translateTransition.setCycleCount(1);
+        translateTransition.setInterpolator(Interpolator.EASE_OUT);
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     public static void ShowLoadingClubOptions(Class<?> thisClass) throws IOException
@@ -236,7 +238,7 @@ public class Main extends Application
         parent.getChildren().add(loadingScreen);
         SetUpRootAnchors(loadingScreen);
 
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(300), loadingScreen);
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), loadingScreen);
 
         fadeTransition.setFromValue(0);
         fadeTransition.setToValue(1);
@@ -253,7 +255,7 @@ public class Main extends Application
         ((AnchorPane)mainStage.getScene().getRoot()).getChildren().add(loadingScreen);
         SetUpRootAnchors(loadingScreen);
 
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(300), loadingScreen);
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), loadingScreen);
 
         fadeTransition.setFromValue(0);
         fadeTransition.setToValue(1);
@@ -270,6 +272,30 @@ public class Main extends Application
         AnchorPane.setRightAnchor(node, 0.0);
     }
 
+    public static void AnimateLoginRoot(AnchorPane loginRoot)
+    {
+        VBox vBoxSidePane = (VBox)loginRoot.lookup("#FX_VBOX_LOGIN");
+        VBox vBoxLoginInput = (VBox)loginRoot.lookup("#FX_VBOX_LOGIN_INPUT");
+        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(300), vBoxSidePane);
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(300), vBoxLoginInput);
+
+        translateTransition.setFromX(-10);
+        translateTransition.setToX(0);
+        translateTransition.setCycleCount(1);
+        translateTransition.setInterpolator(Interpolator.EASE_OUT);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(1);
+        fadeTransition.setCycleCount(1);
+        fadeTransition.setInterpolator(Interpolator.EASE_IN);
+
+        translateTransition.setOnFinished((ActionEvent actionEvent)->
+        {
+            fadeTransition.play();
+        });
+
+        translateTransition.play();
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception
     {
@@ -282,26 +308,7 @@ public class Main extends Application
 
         mainStage.setOnShown((WindowEvent windowEvent)->
         {
-            VBox vBoxSidePane = (VBox)loginRoot.lookup("#FX_VBOX_LOGIN");
-            VBox vBoxLoginInput = (VBox)loginRoot.lookup("#FX_VBOX_LOGIN_INPUT");
-            TranslateTransition translateTransition = new TranslateTransition(Duration.millis(300), vBoxSidePane);
-            FadeTransition fadeTransition = new FadeTransition(Duration.millis(300), vBoxLoginInput);
-
-            translateTransition.setFromX(-10);
-            translateTransition.setToX(0);
-            translateTransition.setCycleCount(1);
-            translateTransition.setInterpolator(Interpolator.EASE_OUT);
-            fadeTransition.setFromValue(0);
-            fadeTransition.setToValue(1);
-            fadeTransition.setCycleCount(1);
-            fadeTransition.setInterpolator(Interpolator.EASE_IN);
-
-            translateTransition.setOnFinished((ActionEvent actionEvent)->
-            {
-                fadeTransition.play();
-            });
-
-            translateTransition.play();
+            AnimateLoginRoot(loginRoot);
         });
 
         mainStage.setOnCloseRequest((WindowEvent windowEvent)->

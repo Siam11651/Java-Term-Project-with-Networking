@@ -44,7 +44,14 @@ public class ReadThreadClient implements Runnable
                     {
                         LoginSuccess loginSuccess = (LoginSuccess)o;
                         Main.clubName = loginSuccess.GetName();
-                        Main.ShowClubStage(getClass());
+                        try
+                        {
+                            Main.ShowClubStage(getClass());
+                        }
+                        catch(IOException ioException)
+                        {
+                            ioException.printStackTrace();
+                        }
                     });
                 }
                 else if(o instanceof LoginFail)
@@ -212,7 +219,7 @@ public class ReadThreadClient implements Runnable
                 alert.setHeaderText("Cannot connect to server");
                 alert.showAndWait();
 
-                VBox loginStage = null;
+                AnchorPane loginStage = null;
 
                 try
                 {
@@ -223,9 +230,13 @@ public class ReadThreadClient implements Runnable
                     ioException.printStackTrace();
                 }
 
-                ((AnchorPane)Main.mainStage.getScene().getRoot()).getChildren().clear();
-                ((AnchorPane)Main.mainStage.getScene().getRoot()).getChildren().add(loginStage);
-                Main.SetUpRootAnchors(loginStage);
+                if(loginStage != null)
+                {
+                    ((AnchorPane)Main.mainStage.getScene().getRoot()).getChildren().clear();
+                    ((AnchorPane)Main.mainStage.getScene().getRoot()).getChildren().add(loginStage);
+                    Main.SetUpRootAnchors(loginStage);
+                    Main.AnimateLoginRoot(loginStage);
+                }
             });
         }
         finally

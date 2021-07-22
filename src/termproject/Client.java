@@ -33,7 +33,7 @@ public class Client
                 alert.setHeaderText("Cannot connect to server");
                 alert.showAndWait();
 
-                VBox loginStage = null;
+                AnchorPane loginStage = null;
 
                 try
                 {
@@ -44,9 +44,13 @@ public class Client
                     ioException.printStackTrace();
                 }
 
-                ((AnchorPane)Main.mainStage.getScene().getRoot()).getChildren().clear();
-                ((AnchorPane)Main.mainStage.getScene().getRoot()).getChildren().add(loginStage);
-                Main.SetUpRootAnchors(loginStage);
+                if(loginStage != null)
+                {
+                    ((AnchorPane)Main.mainStage.getScene().getRoot()).getChildren().clear();
+                    ((AnchorPane)Main.mainStage.getScene().getRoot()).getChildren().add(loginStage);
+                    Main.SetUpRootAnchors(loginStage);
+                    Main.AnimateLoginRoot(loginStage);
+                }
             });
         }
     }
