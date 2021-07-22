@@ -2,7 +2,6 @@ package termproject;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -253,7 +252,7 @@ public class Main extends Application
     {
         mainStage = primaryStage;
         AnchorPane root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("main_root.fxml")));
-        VBox loginVBox = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")));
+        AnchorPane loginVBox = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")));
 
         root.getChildren().add(loginVBox);
         SetUpRootAnchors(loginVBox);

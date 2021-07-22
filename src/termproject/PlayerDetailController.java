@@ -29,11 +29,7 @@ public class PlayerDetailController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        BorderStroke borderStroke = new BorderStroke(Color.color(0, 0, 0, 0.25), BorderStrokeStyle.SOLID,
-                new CornerRadii(10), new BorderWidths(1));
-        Border border = new Border(borderStroke);
 
-        FX_ANCHOR_PANE_DETAILS.setBorder(border);
     }
 
     public void Action_add_to_transfer(ActionEvent actionEvent) throws IOException
