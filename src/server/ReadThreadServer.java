@@ -125,10 +125,17 @@ public class ReadThreadServer implements Runnable
                         {
                             if(player.GetName().equalsIgnoreCase(playerName))
                             {
-                                transferUpdate = new TransferUpdate(playerName, player.GetClub(), from);
+                                if(player.GetTransferListed())
+                                {
+                                    transferUpdate = new TransferUpdate(playerName, player.GetClub(), from);
 
-                                player.SetClub(from);
-                                player.SetTransferListed(false);
+                                    player.SetClub(from);
+                                    player.SetTransferListed(false);
+                                }
+                                else
+                                {
+                                    transferUpdate = new TransferUpdate(playerName, "", from);
+                                }
 
                                 break;
                             }

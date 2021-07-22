@@ -7,7 +7,7 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="termproject.TransferResultController">
     <children>
         <Button mnemonicParsing="false" onAction="#Action_refresh" text="Refresh" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
-        <ListView fx:id="FX_LIST_VIEW_PLAYER_DETAILS" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0" />
+        <ListView fx:id="FX_LIST_VIEW_TRANSFER_PLAYER_DETAILS" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0" />
       <Label fx:id="FX_LABEL_TRANFER_UPDATE_NOTIFICATION" text="Refresh to Update" visible="false" AnchorPane.leftAnchor="76.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font size="16.0" />

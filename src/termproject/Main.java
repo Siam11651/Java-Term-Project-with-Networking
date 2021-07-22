@@ -1,11 +1,11 @@
 package termproject;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
@@ -26,7 +26,7 @@ public class Main extends Application
 {
     public static Client client;
     public static String clubName;
-    public static Stage mainStage;
+    public static Stage mainStage, totalSalaryStage;
     public static PlayerSearchRequest lastPlayerSearchRequest;
     public static MaxDataPlayerRequest lastMaxDataRequest;
 
@@ -66,8 +66,25 @@ public class Main extends Application
             {
                 ((AnchorPane)playerDetail.getChildren().get(1)).getChildren().get(1).setDisable(true);
             }
+            else
+            {
+                listView.getItems().add(playerDetail);
+            }
+        }
+        
+        if(listView.getItems().size() == 0)
+        {
+            Label label = new Label("Wow! Such empty");
+            VBox vBox = new VBox(label);
 
-            listView.getItems().add(playerDetail);
+            vBox.setAlignment(Pos.CENTER);
+            AnchorPane anchorPane = new AnchorPane(vBox);
+
+            AnchorPane.setTopAnchor(vBox, 0.0);
+            AnchorPane.setBottomAnchor(vBox, 0.0);
+            AnchorPane.setLeftAnchor(vBox, 0.0);
+            AnchorPane.setRightAnchor(vBox, 0.0);
+            listView.getItems().add(anchorPane);
         }
 
         ListView<String> optionsList = (ListView<String>) mainStage.getScene().lookup("#FX_LIST_VIEW_CLUB_OPTIONS");
@@ -117,6 +134,21 @@ public class Main extends Application
             }
 
             listView.getItems().add(playerDetail);
+        }
+
+        if(listView.getItems().size() == 0)
+        {
+            Label label = new Label("Wow! Such empty");
+            VBox vBox = new VBox(label);
+
+            vBox.setAlignment(Pos.CENTER);
+            AnchorPane anchorPane = new AnchorPane(vBox);
+
+            AnchorPane.setTopAnchor(vBox, 0.0);
+            AnchorPane.setBottomAnchor(vBox, 0.0);
+            AnchorPane.setLeftAnchor(vBox, 0.0);
+            AnchorPane.setRightAnchor(vBox, 0.0);
+            listView.getItems().add(anchorPane);
         }
 
         ListView<String> optionsList = (ListView<String>) mainStage.getScene().lookup("#FX_LIST_VIEW_CLUB_OPTIONS");
@@ -230,7 +262,7 @@ public class Main extends Application
             }
         });
 
-        mainStage.setTitle("Java Term Project");
+        mainStage.setTitle("Football Manager");
         mainStage.setScene(new Scene(root));
         mainStage.show();
     }

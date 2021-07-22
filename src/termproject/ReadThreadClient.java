@@ -1,8 +1,10 @@
 package termproject;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -120,14 +122,30 @@ public class ReadThreadClient implements Runnable
                         Label transferUpdateNotification = (Label)Main.mainStage.getScene().lookup("#FX_LABEL_TRANFER_UPDATE_NOTIFICATION");
                         Label playerSoldNotification = (Label)Main.mainStage.getScene().lookup("#FX_LABEL_PLAYER_SEARCH_UPDATE_NOTIFICATION");
 
-                        if(transferUpdateNotification != null && !to.equalsIgnoreCase(Main.clubName))
+                        if(transferUpdateNotification != null)
                         {
-                            transferUpdateNotification.setVisible(true);
+                            if(!to.equalsIgnoreCase(Main.clubName))
+                            {
+                                transferUpdateNotification.setVisible(true);
+                            }
+                            else if(from.isEmpty())
+                            {
+                                Alert alert = new Alert(Alert.AlertType.ERROR);
+
+                                alert.setTitle("Player Sold");
+                                alert.setHeaderText("Player already sold. Plesae Refresh to Update");
+                                alert.show();
+                            }
                         }
 
                         if(playerSoldNotification != null && !to.isEmpty() && from.equalsIgnoreCase(Main.clubName))
                         {
                             playerSoldNotification.setVisible(true);
+                        }
+
+                        if(Main.totalSalaryStage != null && from.equalsIgnoreCase(Main.clubName))
+                        {
+                            Main.totalSalaryStage.setTitle("*Refresh to Update*");
                         }
                     });
                 }
@@ -154,7 +172,32 @@ public class ReadThreadClient implements Runnable
 
                     Platform.runLater(()->
                     {
-                        //show total salary
+                        AnchorPane anchorPane = (AnchorPane)Main.totalSalaryStage.getScene().getRoot();
+                        Label label = new Label("Total Salary: " + totalSalary);
+                        Button refresh = new Button("Refresh");
+
+                        refresh.setOnAction((ActionEvent actionEvent)->
+                        {
+                            try
+                            {
+                                Main.totalSalaryStage.close();
+                                PlayerSearchController.RequestTotalSalary(actionEvent, getClass());
+                            }
+                            catch(IOException ioException)
+                            {
+                                ioException.printStackTrace();
+                            }
+                        });
+
+                        label.setWrapText(true);
+                        anchorPane.getChildren().clear();
+                        anchorPane.getChildren().add(label);
+                        anchorPane.getChildren().add(refresh);
+                        AnchorPane.setTopAnchor(label, 10.0);
+                        AnchorPane.setLeftAnchor(label, 10.0);
+                        AnchorPane.setRightAnchor(label, 10.0);
+                        AnchorPane.setBottomAnchor(refresh, 10.0);
+                        AnchorPane.setRightAnchor(refresh, 10.0);
                     });
                 }
             }

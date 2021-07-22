@@ -2,8 +2,15 @@ package termproject;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import util.MaxDataPlayerRequest;
 import util.MaxDataType;
 import util.PlayerSearchRequest;
@@ -11,6 +18,7 @@ import util.TotalSalaryRequest;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class PlayerSearchController implements Initializable
@@ -80,11 +88,31 @@ public class PlayerSearchController implements Initializable
         Main.client.GetNetworkUtil().write(Main.lastMaxDataRequest);
     }
 
-    public void Action_total_salary(ActionEvent actionEvent) throws IOException
+    public static void RequestTotalSalary(ActionEvent actionEvent, Class<?> thisClass) throws IOException
     {
         TotalSalaryRequest totalSalaryRequest = new TotalSalaryRequest(Main.clubName);
 
-        Main.ShowLoadingClubOptions(getClass());
+        VBox vBox = FXMLLoader.load(Objects.requireNonNull(thisClass.getResource("loading.fxml")));
+        AnchorPane anchorPane = new AnchorPane(vBox);
+
+        anchorPane.setPrefSize(300, 100);
+        AnchorPane.setTopAnchor(vBox, 0.0);
+        AnchorPane.setBottomAnchor(vBox, 0.0);
+        AnchorPane.setLeftAnchor(vBox, 0.0);
+        AnchorPane.setRightAnchor(vBox, 0.0);
+
+        Main.totalSalaryStage = new Stage();
+        Main.totalSalaryStage.setScene(new Scene(anchorPane));
+        Main.totalSalaryStage.setResizable(false);
+        Main.totalSalaryStage.setTitle("Totol Salary");
+        Main.totalSalaryStage.initModality(Modality.APPLICATION_MODAL);
+        Main.totalSalaryStage.show();
+
         Main.client.GetNetworkUtil().write(totalSalaryRequest);
+    }
+
+    public void Action_total_salary(ActionEvent actionEvent) throws IOException
+    {
+        RequestTotalSalary(actionEvent, getClass());
     }
 }
