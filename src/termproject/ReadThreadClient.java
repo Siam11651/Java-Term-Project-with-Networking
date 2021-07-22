@@ -44,6 +44,7 @@ public class ReadThreadClient implements Runnable
                     {
                         LoginSuccess loginSuccess = (LoginSuccess)o;
                         Main.clubName = loginSuccess.GetName();
+
                         try
                         {
                             Main.ShowClubStage(getClass());

@@ -112,6 +112,14 @@ public class Main extends Application
                 options.getChildren().clear();
                 options.getChildren().add(transferPlayers);
                 SetUpRootAnchors(transferPlayers);
+
+                FadeTransition fadeTransition = new FadeTransition(Duration.millis(300), transferPlayers);
+
+                fadeTransition.setFromValue(0);
+                fadeTransition.setToValue(1);
+                fadeTransition.setCycleCount(1);
+                fadeTransition.setInterpolator(Interpolator.EASE_IN);
+                fadeTransition.play();
             }
         }
     }
@@ -181,6 +189,14 @@ public class Main extends Application
                 options.getChildren().clear();
                 options.getChildren().add(playerSearched);
                 SetUpRootAnchors(playerSearched);
+
+                FadeTransition fadeTransition = new FadeTransition(Duration.millis(300), playerSearched);
+
+                fadeTransition.setFromValue(0);
+                fadeTransition.setToValue(1);
+                fadeTransition.setCycleCount(1);
+                fadeTransition.setInterpolator(Interpolator.EASE_IN);
+                fadeTransition.play();
             }
         }
     }
@@ -200,6 +216,14 @@ public class Main extends Application
                 options.getChildren().clear();
                 options.getChildren().add(playerSearch);
                 SetUpRootAnchors(playerSearch);
+
+                FadeTransition fadeTransition = new FadeTransition(Duration.millis(300), playerSearch);
+
+                fadeTransition.setFromValue(0);
+                fadeTransition.setToValue(1);
+                fadeTransition.setCycleCount(1);
+                fadeTransition.setInterpolator(Interpolator.EASE_IN);
+                fadeTransition.play();
             }
         }
     }
@@ -238,7 +262,7 @@ public class Main extends Application
         parent.getChildren().add(loadingScreen);
         SetUpRootAnchors(loadingScreen);
 
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), loadingScreen);
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(300), loadingScreen);
 
         fadeTransition.setFromValue(0);
         fadeTransition.setToValue(1);
@@ -255,7 +279,7 @@ public class Main extends Application
         ((AnchorPane)mainStage.getScene().getRoot()).getChildren().add(loadingScreen);
         SetUpRootAnchors(loadingScreen);
 
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), loadingScreen);
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(300), loadingScreen);
 
         fadeTransition.setFromValue(0);
         fadeTransition.setToValue(1);

@@ -1,5 +1,7 @@
 package termproject;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,6 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import util.TransferListRequest;
 
 import java.io.IOException;
@@ -26,6 +29,17 @@ public class ClubStageController implements Initializable
     @FXML
     AnchorPane FX_ANCHOR_PANE_OPTIONS;
 
+    private void AnimateSearchPlayers(VBox searchPlayers)
+    {
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(300), searchPlayers);
+
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(1);
+        fadeTransition.setCycleCount(1);
+        fadeTransition.setInterpolator(Interpolator.EASE_IN);
+        fadeTransition.play();
+    }
+
     private void ShowPlayerSearchStage() throws IOException
     {
         VBox searchPlayers = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("player_search.fxml")));
@@ -33,6 +47,7 @@ public class ClubStageController implements Initializable
         FX_ANCHOR_PANE_OPTIONS.getChildren().clear();
         FX_ANCHOR_PANE_OPTIONS.getChildren().add(searchPlayers);
         Main.SetUpRootAnchors(searchPlayers);
+        AnimateSearchPlayers(searchPlayers);
     }
 
     @Override
