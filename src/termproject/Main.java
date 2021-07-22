@@ -1,6 +1,11 @@
 package termproject;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -11,9 +16,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 import util.CloseRequest;
 import util.MaxDataPlayerRequest;
 import util.Player;
@@ -228,6 +235,14 @@ public class Main extends Application
         parent.getChildren().clear();
         parent.getChildren().add(loadingScreen);
         SetUpRootAnchors(loadingScreen);
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(300), loadingScreen);
+
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(1);
+        fadeTransition.setCycleCount(1);
+        fadeTransition.setInterpolator(Interpolator.EASE_IN);
+        fadeTransition.play();
     }
 
     public static void ShowLoadingScreenRootAnchor(Class<?> thisClass) throws IOException
@@ -237,6 +252,14 @@ public class Main extends Application
         ((AnchorPane)mainStage.getScene().getRoot()).getChildren().clear();
         ((AnchorPane)mainStage.getScene().getRoot()).getChildren().add(loadingScreen);
         SetUpRootAnchors(loadingScreen);
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(300), loadingScreen);
+
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(1);
+        fadeTransition.setCycleCount(1);
+        fadeTransition.setInterpolator(Interpolator.EASE_IN);
+        fadeTransition.play();
     }
 
     public static void SetUpRootAnchors(Node node)
@@ -252,10 +275,34 @@ public class Main extends Application
     {
         mainStage = primaryStage;
         AnchorPane root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("main_root.fxml")));
-        AnchorPane loginVBox = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")));
+        AnchorPane loginRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")));
 
-        root.getChildren().add(loginVBox);
-        SetUpRootAnchors(loginVBox);
+        root.getChildren().add(loginRoot);
+        SetUpRootAnchors(loginRoot);
+
+        mainStage.setOnShown((WindowEvent windowEvent)->
+        {
+            VBox vBoxSidePane = (VBox)loginRoot.lookup("#FX_VBOX_LOGIN");
+            VBox vBoxLoginInput = (VBox)loginRoot.lookup("#FX_VBOX_LOGIN_INPUT");
+            TranslateTransition translateTransition = new TranslateTransition(Duration.millis(300), vBoxSidePane);
+            FadeTransition fadeTransition = new FadeTransition(Duration.millis(300), vBoxLoginInput);
+
+            translateTransition.setFromX(-10);
+            translateTransition.setToX(0);
+            translateTransition.setCycleCount(1);
+            translateTransition.setInterpolator(Interpolator.EASE_OUT);
+            fadeTransition.setFromValue(0);
+            fadeTransition.setToValue(1);
+            fadeTransition.setCycleCount(1);
+            fadeTransition.setInterpolator(Interpolator.EASE_IN);
+
+            translateTransition.setOnFinished((ActionEvent actionEvent)->
+            {
+                fadeTransition.play();
+            });
+
+            translateTransition.play();
+        });
 
         mainStage.setOnCloseRequest((WindowEvent windowEvent)->
         {

@@ -6,7 +6,7 @@
 
 <AnchorPane minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="termproject.LoginController">
    <children>
-      <VBox alignment="CENTER" prefWidth="200.0" style="-fx-background-color: #00000044;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox fx:id="FX_VBOX_LOGIN" alignment="CENTER" prefWidth="200.0" style="-fx-background-color: #00000044;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label maxWidth="180.0" text="Football Manager" wrapText="true">
                <font>
@@ -14,15 +14,19 @@
                </font>
             </Label>
          </children></VBox>
-      <VBox alignment="CENTER_LEFT" fillWidth="false" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" spacing="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="210.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <VBox alignment="CENTER_LEFT" fillWidth="false" layoutX="210.0" layoutY="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="210.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
-            <Label text="Club Name:">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <TextField fx:id="FX_TEXT_FIELD_CLUB_NAME" promptText="Juventus FC" />
-            <Button mnemonicParsing="false" onAction="#Action_login" text="Login" />
+            <VBox fx:id="FX_VBOX_LOGIN_INPUT" alignment="CENTER_LEFT" fillWidth="false" opacity="0.0" spacing="10.0">
+               <children>
+                  <Label text="Club Name:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="FX_TEXT_FIELD_CLUB_NAME" promptText="Juventus FC" />
+                  <Button mnemonicParsing="false" onAction="#Action_login" text="Login" />
+               </children>
+            </VBox>
          </children>
       </VBox>
    </children>
