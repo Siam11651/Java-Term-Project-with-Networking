@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane minWidth="640.0" prefHeight="480.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="termproject.ClubStageController">
    <children>
-      <Label fx:id="FX_LABEL_CLUB_NAME" text="Template Club" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <Label fx:id="FX_LABEL_CLUB_NAME" text="Template Club" AnchorPane.leftAnchor="73.0" AnchorPane.topAnchor="10.0">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <SplitPane dividerPositions="0.25" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="55.0">
+      <SplitPane dividerPositions="0.25" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="73.0">
          <items>
             <ListView fx:id="FX_LIST_VIEW_CLUB_OPTIONS" fixedCellSize="50.0" maxWidth="152.0" minWidth="152.0" onMouseClicked="#MouseClicked_option_list" />
             <AnchorPane fx:id="FX_ANCHOR_PANE_OPTIONS" minWidth="460.0" />
          </items>
       </SplitPane>
+      <ImageView fx:id="FX_IMAGE_VIEW_CLUB_ICON" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
    </children>
 </AnchorPane>

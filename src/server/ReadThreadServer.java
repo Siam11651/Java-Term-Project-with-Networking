@@ -12,7 +12,7 @@ public class ReadThreadServer implements Runnable
     private final ArrayList<Player> players;
     private Thread thread;
     private NetworkUtil networkUtil;
-    public HashMap<String, NetworkUtil> clientMap;
+    private HashMap<String, NetworkUtil> clientMap;
 
     public ReadThreadServer(ArrayList<Player> players, HashMap<String, NetworkUtil> map, NetworkUtil networkUtil)
     {

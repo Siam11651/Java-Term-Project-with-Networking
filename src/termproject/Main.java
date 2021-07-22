@@ -2,7 +2,6 @@ package termproject;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
-import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -38,6 +37,7 @@ public class Main extends Application
     public static Stage mainStage, totalSalaryStage;
     public static PlayerSearchRequest lastPlayerSearchRequest;
     public static MaxDataPlayerRequest lastMaxDataRequest;
+    public static byte[] clubIcon;
 
     public static void NullifyAllLastSearches()
     {
@@ -231,7 +231,10 @@ public class Main extends Application
     public static void ShowClubStage(Class<?> thisClass) throws IOException
     {
         AnchorPane clubStage = FXMLLoader.load(Objects.requireNonNull(thisClass.getResource("club_stage.fxml")));
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(clubIcon);
+        ImageView clubIconImageView = (ImageView)clubStage.lookup("#FX_IMAGE_VIEW_CLUB_ICON");
 
+        clubIconImageView.setImage(new Image(byteArrayInputStream));
         ((Label)clubStage.getChildren().get(0)).setText(Main.clubName);
         ((AnchorPane)Main.mainStage.getScene().getRoot()).getChildren().clear();
         ((AnchorPane)Main.mainStage.getScene().getRoot()).getChildren().add(clubStage);

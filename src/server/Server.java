@@ -12,18 +12,21 @@ import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Server
 {
     private ServerSocket serverSocket;
     private final ArrayList<Player> players;
-    public HashMap<String, NetworkUtil> clientMap;
+    private HashMap<String, NetworkUtil> clientMap;
+    private HashMap<String, byte[]> clubIconsMap;
 
-    Server(ArrayList<Player> players)
+    Server(ArrayList<Player> players, HashMap<String, byte[]> clubIconsMap)
     {
         clientMap = new HashMap<>();
         this.players = players;
+        this.clubIconsMap = clubIconsMap;
 
         try
         {
@@ -73,7 +76,19 @@ public class Server
                 }
             }
 
-            LoginSuccess loginSuccess = new LoginSuccess(clubNameFormal);
+            byte[] clubIconByteArr = null;
+
+            for(Map.Entry<String, byte[]> entry : clubIconsMap.entrySet())
+            {
+                if(entry.getKey().equalsIgnoreCase(clubNameFormal))
+                {
+                    clubIconByteArr = entry.getValue();
+
+                    break;
+                }
+            }
+
+            LoginSuccess loginSuccess = new LoginSuccess(clubNameFormal, clubIconByteArr);
 
             System.out.println("Client:'" + clubNameFormal + "' connected successfully");
             networkUtil.write(loginSuccess);
@@ -92,11 +107,11 @@ public class Server
     {
         ArrayList<Player> players = new ArrayList<>();
         File file = new File("data/players.dat");
-        FileInputStream fileInputStream = new FileInputStream(file);
+        FileInputStream playerFileInputStream = new FileInputStream(file);
 
         byte[] playerCountByteArr = new byte[Integer.SIZE / 8];
 
-        fileInputStream.read(playerCountByteArr, 0, Integer.SIZE / 8);
+        playerFileInputStream.read(playerCountByteArr, 0, Integer.SIZE / 8);
 
         int playerCount = ByteBuffer.wrap(playerCountByteArr).getInt();
 
@@ -108,30 +123,64 @@ public class Server
             {
                 byte[] stringSizeByteArr = new byte[Integer.SIZE / 8];
 
-                fileInputStream.read(stringSizeByteArr, 0, Integer.SIZE / 8);
+                playerFileInputStream.read(stringSizeByteArr, 0, Integer.SIZE / 8);
 
                 int stringSize = ByteBuffer.wrap(stringSizeByteArr).getInt();
                 byte[] stringContentByteArr = new byte[stringSize];
 
-                fileInputStream.read(stringContentByteArr, 0, stringSize);
+                playerFileInputStream.read(stringContentByteArr, 0, stringSize);
 
                 data[j] = new String(stringContentByteArr);
             }
 
             byte[] imageSizeByteArr = new byte[Integer.SIZE / 8];
 
-            fileInputStream.read(imageSizeByteArr, 0, Integer.SIZE / 8);
+            playerFileInputStream.read(imageSizeByteArr, 0, Integer.SIZE / 8);
 
             int imageSize = ByteBuffer.wrap(imageSizeByteArr).getInt();
             byte[] imageByteArr = new byte[imageSize];
 
-            fileInputStream.read(imageByteArr, 0, imageSize);
+            playerFileInputStream.read(imageByteArr, 0, imageSize);
 
             players.add(new Player(data[0], data[1], Integer.parseInt(data[2]), Double.parseDouble(data[3]), data[4], data[5], Integer.parseInt(data[6]), (int)Double.parseDouble(data[7]), imageByteArr, false));
         }
 
-        fileInputStream.close();
+        playerFileInputStream.close();
 
-        Server server = new Server(players);
+        HashMap<String, byte[]> clubIconsMap = new HashMap<>();
+        FileInputStream clubIconFileInputStream = new FileInputStream("data/club-icons.dat");
+
+        byte[] clubCountByteArr = new byte[Integer.SIZE / 8];
+
+        clubIconFileInputStream.read(clubCountByteArr, 0, Integer.SIZE / 8);
+
+        int clubCount = ByteBuffer.wrap(clubCountByteArr).getInt();
+
+        for(int i = 0; i < clubCount; i++)
+        {
+            byte[] nameSizeByteArr = new byte[Integer.SIZE / 8];
+
+            clubIconFileInputStream.read(nameSizeByteArr, 0, Integer.SIZE / 8);
+
+            int nameSize = ByteBuffer.wrap(nameSizeByteArr).getInt();
+            byte[] nameByteArr = new byte[nameSize];
+
+            clubIconFileInputStream.read(nameByteArr, 0, nameSize);
+
+            String name = new String(nameByteArr);
+            byte[] imageSizeByteArr = new byte[Integer.SIZE / 8];
+
+            clubIconFileInputStream.read(imageSizeByteArr, 0, Integer.SIZE / 8);
+
+            int imageSize = ByteBuffer.wrap(imageSizeByteArr).getInt();
+
+            clubIconsMap.put(name, new byte[imageSize]);
+            clubIconFileInputStream.read(clubIconsMap.get(name), 0, imageSize);
+        }
+
+        clubIconFileInputStream.close();
+        System.out.println("Data Read Complete");
+
+        Server server = new Server(players, clubIconsMap);
     }
 }
