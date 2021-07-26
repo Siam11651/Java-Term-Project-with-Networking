@@ -10,16 +10,15 @@ import java.util.Map;
 public class ReadThreadServer implements Runnable
 {
     private final ArrayList<Player> players;
-    private Thread thread;
-    private NetworkUtil networkUtil;
-    private HashMap<String, NetworkUtil> clientMap;
+    private final NetworkUtil networkUtil;
+    private final HashMap<String, NetworkUtil> clientMap;
 
     public ReadThreadServer(ArrayList<Player> players, HashMap<String, NetworkUtil> map, NetworkUtil networkUtil)
     {
         this.players = players;
         this.clientMap = map;
         this.networkUtil = networkUtil;
-        this.thread = new Thread(this);
+        Thread thread = new Thread(this);
 
         thread.start();
     }
@@ -86,7 +85,6 @@ public class ReadThreadServer implements Runnable
                     else if(o instanceof TransferEnlistRequest)
                     {
                         TransferEnlistRequest transferEnlistRequest = (TransferEnlistRequest)o;
-                        String from = transferEnlistRequest.GetFrom();
                         String playerName = transferEnlistRequest.GetPlayerName();
                         TransferUpdate transferUpdate = null;
 

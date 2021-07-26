@@ -240,19 +240,13 @@ public class Main extends Application
         ((AnchorPane)Main.mainStage.getScene().getRoot()).getChildren().add(clubStage);
         Main.SetUpRootAnchors(clubStage);
 
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), clubStage);
-        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), clubStage);
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(600), clubStage);
 
         fadeTransition.setFromValue(0);
         fadeTransition.setToValue(1);
         fadeTransition.setCycleCount(1);
-        fadeTransition.setInterpolator(Interpolator.EASE_OUT);
-        translateTransition.setFromY(10);
-        translateTransition.setToY(0);
-        translateTransition.setCycleCount(1);
-        translateTransition.setInterpolator(Interpolator.EASE_OUT);
+        fadeTransition.setInterpolator(Interpolator.EASE_IN);
         fadeTransition.play();
-        translateTransition.play();
     }
 
     public static void ShowLoadingClubOptions(Class<?> thisClass) throws IOException
@@ -271,7 +265,7 @@ public class Main extends Application
         fadeTransition.setToValue(1);
         fadeTransition.setCycleCount(1);
         fadeTransition.setInterpolator(Interpolator.EASE_IN);
-        fadeTransition.play();
+        //fadeTransition.play();
     }
 
     public static void ShowLoadingScreenRootAnchor(Class<?> thisClass) throws IOException
@@ -288,7 +282,7 @@ public class Main extends Application
         fadeTransition.setToValue(1);
         fadeTransition.setCycleCount(1);
         fadeTransition.setInterpolator(Interpolator.EASE_IN);
-        fadeTransition.play();
+        //fadeTransition.play();
     }
 
     public static void SetUpRootAnchors(Node node)

@@ -1,6 +1,5 @@
 package server;
 
-import javafx.scene.image.Image;
 import util.Player;
 import util.LoginFail;
 import util.LoginSuccess;
@@ -13,14 +12,12 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Server
 {
-    private ServerSocket serverSocket;
     private final ArrayList<Player> players;
-    private HashMap<String, NetworkUtil> clientMap;
-    private HashMap<String, byte[]> clubIconsMap;
+    private final HashMap<String, NetworkUtil> clientMap;
+    private final HashMap<String, byte[]> clubIconsMap;
 
     Server(ArrayList<Player> players, HashMap<String, byte[]> clubIconsMap)
     {
@@ -30,7 +27,7 @@ public class Server
 
         try
         {
-            serverSocket = new ServerSocket(33333);
+            ServerSocket serverSocket = new ServerSocket(33333);
 
             while (true)
             {
@@ -103,7 +100,7 @@ public class Server
         }
     }
 
-    public static void main(String args[]) throws IOException
+    public static void main(String[] args) throws IOException
     {
         ArrayList<Player> players = new ArrayList<>();
         File file = new File("data/players.dat");
